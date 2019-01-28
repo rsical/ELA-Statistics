@@ -23,8 +23,8 @@
   </head>
 
 <body>
-
-	<center><h2>TEST</h2></center>
+	<center><h2>Teachers & Clases</h2></center>
+	
 
 	<button type="button" data-toggle="modal" data-target="#createTeacher">Create Teacher</button>
 
