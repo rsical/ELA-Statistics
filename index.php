@@ -82,46 +82,44 @@
         }
         ?>
 
-    <form method='POST' action='index.php'>
+<form method='POST' action='index.php'>
 
     <div class="container w-100 h-100 ">
         <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-lg-8 col-sm-10 col-md-10">
-            <div class="login-panel">
-                <h4 class="login-panel-title">ELA Statistics Login</h4>
-                <p class="login-panel-tagline">Enter your .edu email and password</p>
-                <div class="login-panel-section">
-                    <div class="form-group">
-                        <div class="input-group margin-bottom-sm">
+            <div class="col-lg-8 col-sm-10 col-md-10">
+                <div class="login-panel">
+                    <h4 class="login-panel-title">ELA Statistics Login</h4>
+                    <p class="login-panel-tagline">Enter your .edu email and password</p>
+                    <div class="login-panel-section">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
 
                                 <input class="form-control" type="text" placeholder="Email address" name="uname">
                             </div>
-                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="input-group">
 
-                            <input class="form-control" type="password" placeholder="Password" name="password">
+                                <input class="form-control" type="password" placeholder="Password" name="password">
 
+                            </div>
                         </div>
+
+                        <div class="checkbox checkbox-circle checkbox-success checkbox-small">
+
+                            <a href="#" class="pull-right">Forgot your password?</a>
                         </div>
-
-                <div class="checkbox checkbox-circle checkbox-success checkbox-small">
-
-                <a href="#" class="pull-right">Forgot your password?</a>
+                    </div>
+                    <div class="login-panel-section">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i> Login</button> |
+                            <a href="#">Request an Account</a>
                     </div>
                 </div>
-                <div class="login-panel-section">
-                <button type="submit" class="btn btn-default">
-                    <i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i> Login</button> |
-                <a href="#">Request an Account</a>
-
-                </div>
-                </div>
-                </div>
             </div>
-            </div>
-
-	    </form>
+        </div>
+    </div>
+</form>
 
 
 	
