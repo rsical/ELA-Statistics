@@ -25,7 +25,7 @@
         crossorigin="anonymous">
 
 
-				<link href="../css/loginStyle.css" rel="stylesheet">
+	<link href="./css/loginStyle.css" rel="stylesheet">
 
 </head>
 <body>
@@ -44,6 +44,7 @@
 
 	$result = $conn->query("SELECT * FROM UserAccount WHERE Email='".$uname."' AND Password='".sha1($password)."'");
   //$result = $conn->query("SELECT * FROM useraccount WHERE Email='".$uname."' AND Password='".$password."'");
+  
 
 		if ($result->num_rows)
 		{
@@ -71,61 +72,60 @@
 	else
 	{
 		  if ($uname!="")
-		  {
-			   echo "<span style='color:red;'>LOGIN FAILURE: ".$uname." is not an authorized user.</span><br>\n";
-		    }
+		  { ?>
+			   <span style='color:red;'>LOGIN FAILURE: <?= $uname ?> is not an authorized user.</span><br>
+		   <?php }
 		      else
 		      {
 			         echo "";
 		      }
-    	}
+        }
+        ?>
 
-	echo " 		<form method='POST' action='index.php'>\n";
+    <form method='POST' action='index.php'>
 
-  echo ' <div class="container w-100 h-100 ">';
-  echo '  <div class="row h-100 justify-content-center align-items-center">';
-  echo '    <div class="col-lg-8 col-sm-10 col-md-10">';
-  echo '        <div class="login-panel">';
-  echo '            <h4 class="login-panel-title">ELA Statistics Login</h4>';
-  echo '            <p class="login-panel-tagline">Enter your .edu email and password</p>';
-  echo '            <div class="login-panel-section">';
-  echo '                <div class="form-group">';
-  echo '                    <div class="input-group margin-bottom-sm">';
+    <div class="container w-100 h-100 ">
+        <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-lg-8 col-sm-10 col-md-10">
+            <div class="login-panel">
+                <h4 class="login-panel-title">ELA Statistics Login</h4>
+                <p class="login-panel-tagline">Enter your .edu email and password</p>
+                <div class="login-panel-section">
+                    <div class="form-group">
+                        <div class="input-group margin-bottom-sm">
 
-  echo '                             <input class="form-control" type="text" placeholder="Email address" name="uname">';
-  echo '		                </div>';
-  echo '		                </div>';
-  echo '                   <div class="form-group">';
-  echo '                       <div class="input-group">';
+                                <input class="form-control" type="text" placeholder="Email address" name="uname">
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group">
 
-  echo '                       <input class="form-control" type="password" placeholder="Password" name="password">';
+                            <input class="form-control" type="password" placeholder="Password" name="password">
 
-  echo '	              	</div>';
-  echo '	             	</div>';
+                        </div>
+                        </div>
 
-  echo '            <div class="checkbox checkbox-circle checkbox-success checkbox-small">';
+                <div class="checkbox checkbox-circle checkbox-success checkbox-small">
 
-  echo '            <a href="#" class="pull-right">Forgot your password?</a>';
-  echo '		        </div>';
-  echo '	     	   </div>';
-  echo '          <div class="login-panel-section">';
-  echo '           <button type="submit" class="btn btn-default">';
-  echo '              <i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i> Login</button> |';
-  echo '           <a href="#">Request an Account</a>';
+                <a href="#" class="pull-right">Forgot your password?</a>
+                    </div>
+                </div>
+                <div class="login-panel-section">
+                <button type="submit" class="btn btn-default">
+                    <i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i> Login</button> |
+                <a href="#">Request an Account</a>
 
-  echo '		      </div>';
-  echo '		     </div>';
-  echo '		    </div>';
-  echo '		   </div>';
-  echo '		 </div>';
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
 
-
-
-	echo "		</form>\n";
+	    </form>
 
 
-	echo "</html>\n";
+	
 
-?>
+
 </body>
 </html>
