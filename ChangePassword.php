@@ -35,7 +35,7 @@ $pwd2 = sha1($conn->real_escape_string($_POST['pwd2']));
 
 
 }
-	$conn->close();
+	
 
 ?>
 

@@ -11,7 +11,7 @@
 <body>
 
 		<?php
-  include ("dbConnection.php");
+  include ("./db/connection/dbConnection.php");
   $zero= 0;
 
   if (isset($_POST['Delete']))

@@ -15,6 +15,7 @@
 
 <head>
     
+    <title>ELA Stats</title>
 
     <?php include './includedFrameworks/bootstrapHead.html';?>
 
@@ -23,6 +24,7 @@
 </head>
 
 <body>
+ 
 
     
     <?php include './navigation/navBegin.html'; ?>

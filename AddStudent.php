@@ -19,7 +19,7 @@ else
 }
 
 
-  $conn->close();
+  
   ?>
 
 	<form method="post">
