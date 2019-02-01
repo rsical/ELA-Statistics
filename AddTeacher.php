@@ -14,7 +14,6 @@
 
 <html lang="en">
   <head>
-    <title>Create Teacher</title>
     	<meta charset="utf-8">
 </head>
 
@@ -23,14 +22,18 @@
 		<?php
   include ("./db/connection/dbConnection.php");
 
-  if (isset($_POST['Create']))
+  if (isset($_POST['CreateTeacher']))
   {
 		$password = random_password(8);
 		$fName = $_POST['fname'];
 		$lName = $_POST['lname'];
 		$email = $_POST['email'];
 		$school = $_POST['school'];
-		$CreateTeacherinUsersTable =("INSERT INTO useraccount (SchoolID, FName, LName, Email, Password, AccountType, RecoveryPassword) VALUES ('$school', '$fName', '$lName', '$email', '$password', 'teacher-new', 0)");
+		$class = $_POST['class'];
+
+		$iona="@iona.edu";
+		$teachersEmail= $email . $iona;
+		$CreateTeacherinUsersTable =("INSERT INTO useraccount (SchoolID, FName, LName, Email, Password, AccountType, RecoveryPassword) VALUES ('$school', '$fName', '$lName', '$teachersEmail', '$password', 'teacher-new', 0)");
 
 		if($conn->query($CreateTeacherinUsersTable) == TRUE){
 	  	$sqlId="SELECT UserID from useraccount
@@ -42,11 +45,23 @@
 			$CreateTeacherinTeachersTable =("INSERT INTO teacher (SchoolID, UserID) VALUES ('$school', $userId)");
 		}
 			if($conn->query($CreateTeacherinTeachersTable) == TRUE){
- 				echo "<script>alert('Teacher Created Succesfully');</script>";
+				$sqlId="SELECT TeacherID from teacher
+				where TeacherID=(SELECT max(TeacherID) from teacher) ;" ;
+				$result = $conn->query($sqlId) or die('Could not find user id: '.$conn->error);
+				$row = $result->fetch_assoc();
+				$teacherId=$row["TeacherID" ];
+
+				$sqlUpdateClass= "UPDATE class SET TeacherID= $teacherId
+		    WHERE ClassID='$class';";
+			 }
+
+		    if ($conn->query($sqlUpdateClass) == TRUE) {
+			echo "<meta http-equiv='refresh' content='0'>";
 			}
 					else{
- 	 					echo "<script>alert('Teacher Could Not Be Created');</script>";
+ 	 					echo "Error:";
  	 				}
+					header("refresh:2; url=TeachersAndClasses.php");
     }
 
   ?>
@@ -65,7 +80,7 @@
 	</tr>
 	<tr>
 	<td style='color:black;'>Email  </td>
-	<td><input style='color:black;' type="text" name="email" required></td>
+	 <td><input style='color:black;' type="text" name="email" required >@iona.edu</td>
 	</tr>
 	<tr>
 		<td style='color:black;'>Select School</td>
@@ -78,6 +93,23 @@
 					while ( $row = mysqli_fetch_array ($result) ) {
 							echo '<option value="'.$row["SchoolID"].'">'.$row["School_Name"].'</option>';
 					}
+		?>
+	</select>
+		</td>
+	</tr>
+	<tr>
+		<td style='color:black;'>Assign Class</td>
+		<td>	<select name="class">
+			<?php
+			$sqlClass="SELECT  * FROM class
+								 WHERE TeacherID=0 AND
+								 ClassYear = YEAR(CURDATE());";
+			$result = $conn->query($sqlClass) or die('Error showing school names'.$conn->error);
+
+			//incorporate into drop down list
+					while ( $row = mysqli_fetch_array ($result) ) {
+							echo '<option value="'.$row["ClassID"].'">'.$row["Grade"].'</option>';
+					}
   $conn->close();
 		?>
 	</select>
@@ -85,7 +117,7 @@
 	</tr>
 	</table>
 	<br>
-	<center><button class="button suggestion suggestionsButton" type ="submit" name="Create" >Create </button></center>
+	<center><button class="button suggestion suggestionsButton" type ="submit" name="CreateTeacher" >Create </button></center>
 </form>
 
 

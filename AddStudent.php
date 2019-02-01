@@ -11,15 +11,15 @@
 		$CreateStudent =("INSERT INTO student (FName, LName) VALUES ('$fName', '$lName')");
 
 		  if($conn->query($CreateStudent) == TRUE){
-  echo "<script>alert('Student Created Succesfully');</script>";
+  echo "Student Created Successfully";
 }
 else
-	echo "<script>alert('Student Could Not Be Created');</script>";
+	echo "Error";
 
 }
 
 
-  
+
   ?>
 
 	<form method="post">
@@ -38,4 +38,3 @@ else
 	<br>
 	<center><button class="button suggestion suggestionsButton" type ="submit" name="Create" >Create </button></center>
 </form>
-

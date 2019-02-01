@@ -32,7 +32,7 @@
 	<div class="row">
 		<h2 >Teachers &amp; Classes</h2>
 	</div>
-	
+
 	<div class="row form-group">
 		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createTeacher"><span class="fa fa-plus"></span> Create Teacher</button>
 	</div>
@@ -68,7 +68,7 @@
 				 $grade = $row["Grade"];
 				 ?>
 
-				 
+
 				 <tr>
 				 <td><input class="form-control" name="Name" type="text"   value="<?= $FName ?> <?= $LName ?>"></td>
 
@@ -85,13 +85,13 @@
 					<td><input name="teacherId" type="hidden" value="<?= $TeacherId ?>"  ></td>
 				</tr>
 				</form>
-		<?php } ?> 
+		<?php } ?>
 		</table>
 			 </div>
-		<?php } 
+		<?php }
 		else {
 			echo "0 results";
-		} 
+		}
 		 ?>
 
 		 <div class="modal fade" id="createTeacher" role="dialog">
@@ -99,7 +99,6 @@
 	      	<div class="modal-content">
 	        	<div class="modal-header">
 	          	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	          	<h4 class="modal-title">Crate Teacher</h4>
 	        	</div>
 	        	<div class="modal-body">
 	          	<?php include 'AddTeacher.php';?>
@@ -107,7 +106,7 @@
 	      	</div>
 	    	</div>
 			</div>
-			
+
 </div>
 
 <?php include './navigation/navEnd.html'; ?>
