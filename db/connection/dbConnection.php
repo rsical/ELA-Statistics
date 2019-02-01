@@ -1,7 +1,7 @@
 <?php
 $server = 'localhost';
 $dbusername = 'root';
-$dbpassword = '';
+$dbpassword = 'root';
 $dbname = 'ela';
 $currUserID = 2;
 // Create connection
