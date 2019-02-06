@@ -30,7 +30,10 @@
 </head>
 <body>
 <?php
-	session_start();
+    session_start();
+    
+    $uname="";
+    $password="";
 
 	if (isset($_POST['uname']) && isset($_POST['password']))
 	{
