@@ -21,34 +21,20 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav>		        
 
-		
-        <div class="modal fade" id="AddStudent" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <?php include 'AddStudent.php';?>
-                        </div>
-                    </div>
+    <div class="modal fade" id="ChangePass" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <?php include 'ChangePassword.php';?>
                 </div>
             </div>
-
-            <div class="modal fade" id="ChangePass" role="dialog">
-	 	        <div class="modal-dialog">
-	 		        <div class="modal-content">
-	 			        <div class="modal-header">
-	 				        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	 			        </div>
-	 			        <div class="modal-body">
-	 				        <?php include 'ChangePassword.php';?>
-	 			        </div>
-	 		        </div>
-	 	        </div>
-	 	    </div>
+        </div>
+    </div>
 
     <div class="d-flex align-items-stretch">
         <div class="sidebar bg-dark">
@@ -74,32 +60,70 @@
                         <i class="fa fa-users fa-fw"></i>Groups</a>
                 </li>
 
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#AddStudent">
-                        <i class="fa fa-plus fa-fw"></i>Add Student</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-plus fa-fw"></i>Add Results</a>
-                </li>
+                
+                <?php 
+                    //if teacher, allow options to add a student or add results
+                    if (isset($_SESSION['isTeacher'])) {
+                        if ($_SESSION['isTeacher']) { ?>
 
-                <li>
-                    <a href="#adminMenu" data-toggle="collapse">
-                        <i class="fa fa-user-cog fa-fw"></i>
-                        <u>Admin</u>
-                    </a>
-                    <ul id="adminMenu" class="list-unstyled collapse">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-edit fa-fw"></i>Exams &amp; Answer Keys</a>
-                        </li>
-                        <li>
-                            <a href="TeachersAndClasses.php">
-                                <i class="fa fa-edit fa-fw"></i>Teachers &amp; Classes</a>
-                        </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#AddStudent">
+                                    <i class="fa fa-plus fa-fw"></i>Add Student</a>
+                            </li>
 
-                    </ul>
-                </li>
+                            <div class="modal fade" id="AddStudent" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php include 'AddStudent.php';?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-plus fa-fw"></i>Add Results</a>
+                            </li>
+
+
+                        <?php }
+                    }
+                ?>
+
+
+
+
+
+
+                <?php 
+                    //if admin, allow options for exams/answer keys and teachers/classes
+                    if (isset($_SESSION['isAdmin'])) {
+                        if ($_SESSION['isAdmin']) { ?>
+
+                            <li>
+                                <a href="#adminMenu" data-toggle="collapse">
+                                    <i class="fa fa-user-cog fa-fw"></i>
+                                    <u>Admin</u>
+                                </a>
+                                <ul id="adminMenu" class="list-unstyled collapse">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-edit fa-fw"></i>Exams &amp; Answer Keys</a>
+                                    </li>
+                                    <li>
+                                        <a href="TeachersAndClasses.php">
+                                            <i class="fa fa-edit fa-fw"></i>Teachers &amp; Classes</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        <?php }
+                    }   
+                ?>
 
             </ul>
         </div>

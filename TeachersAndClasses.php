@@ -8,6 +8,12 @@
 	{
 		header("Location: logout.php");
 	}
+
+	if (isset($_SESSION['isAdmin'])) {
+		if (!$_SESSION['isAdmin']) { 
+			header("Location: 403.php");
+		}
+	}
 ?>
 
 <!DOCTYPE html>
