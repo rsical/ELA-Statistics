@@ -52,10 +52,33 @@
 		if ($result->num_rows)
 		{
 			$row = $result->fetch_assoc();
-			$_SESSION['UserID'] = $row['UserID'];
-			$loginType = $row['AccountType'];
-      $admin ="admin";
-      $user ="teacher-new";
+            $_SESSION['UserID'] = $row['UserID'];
+            
+            //get the account type
+            $loginType = $row['AccountType'];
+
+            $admin ="admin";
+            $user ="teacher-new";
+
+            //initally set all roles to false
+            $_SESSION['isAdmin']=false;
+            $_SESSION['isTeacher']=false;
+
+            //if admin, set role to admin
+            if($loginType === $admin){
+                $_SESSION['isAdmin']=true;
+            }
+
+            //if teacher, set role to teacher
+            else if($loginType === $user){
+                $_SESSION['isTeacher']=true;
+
+            }
+            
+           
+
+            
+          
 
 		}
 
