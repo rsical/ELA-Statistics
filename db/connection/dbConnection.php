@@ -1,7 +1,25 @@
 <?php
 $server = 'localhost';
 $dbusername = 'root';
-$dbpassword = 'root';
+
+$user_agent = getenv("HTTP_USER_AGENT");
+
+//if the user is on windows there is no password
+if(strpos($user_agent, "Win")!== FALSE){
+  $dbpassword = '';
+}
+
+//if user is on mac, password is root
+elseif(strpos($user_agent, "Mac")!== FALSE){
+  $dbpassword = 'root';
+}
+
+//assume password is root for any other os
+else{
+  $dbpassword = 'root';
+}
+
+
 $dbname = 'ela';
 $currUserID = 2;
 // Create connection
