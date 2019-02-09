@@ -1,0 +1,86 @@
+Amanda's Git Basics Cheatsheet
+
+
+Download Git:
+https://git-scm.com/downloads
+-------------------------------------------------
+
+Cloning:
+
+Clone the project onto your computer:
+git clone https://github.com/a-aebig/ELA-Statistics.git
+
+You will then have a copy of the project locally. A clone need only be done once.
+--------------------------------------------------
+
+Commits:
+
+When you make changes locally, you want to commit your changes.
+A commit will be saved in the project's history, so you can always refer back to it.
+
+Add all your changed files to a staging area:
+git add . 
+(alternatively, by file, git add <filename>)
+
+Commit the changes locally along with a descriptive message of your changes:
+git commit -m "commit message" 
+
+When you are ready, you can push your changes to the remote repository:
+git push 
+---------------------------------------------------
+
+Branches:
+
+It is best practice to make your own branch for the feature you are working on. 
+Here are some commands related to branches.
+
+List all of your local branches and the branch you are currently on:
+git branch 
+
+Switch to a new branch:
+git checkout <branchname>
+
+Create a new local branch:
+git checkout -b <branchname>
+
+Delete a local branch:
+git branch -d <branchname>
+-------------------------------------------------------
+
+Updating:
+
+Changes may be made to a remote branch that you want in your local branch.
+
+To get the latest changes from a remote branch merge them into your local branch:
+git pull
+(alternatively, git fetch, then, git merge)
+-------------------------------------------------------
+
+Merge conflicts:
+
+Merge conflicts may arise if someone has made a change to the same line of code that you did.
+Git will mark the conflicts in the affected files. It is your job to choose which lines to keep and which to discard. (consulting with others is best!)
+-------------------------------------------------------
+
+Merging with master:
+
+The master branch is the branch where the code is generally considered 'working'. 
+
+Eventually, you will want your work merged into the master branch once you have testing that things are working.
+
+You will need to open a pull request for your branch. This can be done on our github page by hitting the 'new pull request' button.
+If there are any merge conflicts, it will tell you upon opening the pull request. These conflicts must be resolved before you can perform the merge.
+On professional software development teams, there is usually a reviewer who will approve (or deny) your pull request based on what you submitted. 
+--------------------------------------------------------
+
+
+Some more useful commands:
+
+git status (check if your local branch is up to date with the remote, show any files you changed)
+git diff (compare your local changes to the past commit)
+git reset --hard (delete your local changes)
+git log (view a log of all commits)
+
+
+
+This should get you started with the basics, please do not hesitate to reach out to me (or stack overflow), if you have questions. 
