@@ -4,7 +4,7 @@
         </a>
 
         <a class="navbar-brand" href="./dashboard.php">ELA Statistics Analyzer</a>
-            
+
 
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav ml-auto">
@@ -21,7 +21,7 @@
                 </li>
             </ul>
         </div>
-    </nav>		        
+    </nav>
 
     <div class="modal fade" id="ChangePass" role="dialog">
         <div class="modal-dialog">
@@ -39,19 +39,19 @@
     <div class="d-flex align-items-stretch">
         <div class="sidebar bg-dark">
             <ul class="list-unstyled">
-                <li>
-                    <a href="./dashboard.php">
-                        <i class="fa fa-home fa-fw"></i>Profiles</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-file-alt fa-fw"></i>Exams</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-chart-line fa-fw"></i>Student Statistics</a>
-                </li>
-                <li>
+              <li>
+                  <a href="Profiles.php">
+                      <i class="fa fa-home fa-fw"></i>Profiles</a>
+              </li>
+              <li>
+                  <a href="ExamStatistics.php">
+                      <i class="fa fa-file-alt fa-fw"></i>Exams</a>
+              </li>
+              <li>
+                  <a href="StudentStatistics.php">
+                      <i class="fa fa-chart-line fa-fw"></i>Student Statistics</a>
+              </li>
+              <li>
                     <a href="#">
                         <i class="fa fa-chart-area fa-fw"></i>Graphs</a>
                 </li>
@@ -60,8 +60,8 @@
                         <i class="fa fa-users fa-fw"></i>Groups</a>
                 </li>
 
-                
-                <?php 
+
+                <?php
                     //if teacher, allow options to add a student or add results
                     if (isset($_SESSION['isTeacher'])) {
                         if ($_SESSION['isTeacher']) { ?>
@@ -99,7 +99,7 @@
 
 
 
-                <?php 
+                <?php
                     //if admin, allow options for exams/answer keys and teachers/classes
                     if (isset($_SESSION['isAdmin'])) {
                         if ($_SESSION['isAdmin']) { ?>
@@ -122,7 +122,7 @@
                                 </ul>
                             </li>
                         <?php }
-                    }   
+                    }
                 ?>
 
             </ul>
