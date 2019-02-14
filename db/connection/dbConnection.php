@@ -21,7 +21,6 @@ else{
 
 
 $dbname = 'ela';
-$currUserID = 2;
 // Create connection
 
 $conn = new mysqli($server, $dbusername, $dbpassword, $dbname);

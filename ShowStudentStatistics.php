@@ -19,10 +19,7 @@
 	  	$GLOBALS['grade'] = $_POST['grade'];
 			$GLOBALS['scope'] = $_POST['scope'];
 			$GLOBALS['student'] = $_POST['student'];
-	  	//$scope = $_POST['scope'];
-	  	//$student = $_POST['student'];
-			echo $student;
-			echo $scope;
+
 }
 ?>
 <html lang="en">
@@ -178,7 +175,7 @@ WHERE exam.BookID=(SELECT BookID FROM assessment
 						$Average = $points / $resp;
 
 	?>
-					<td><input style="border:none" name="Average" type="text"   value="<?= number_format((float)$Average,2, '.', ' ')?>" size="4" readonly>Points</td>
+					<td><input style="border:none" name="Average" type="text"   value="<?= number_format((float)$Average,2, '.', ' ')?>" size="5" readonly>Points</td>
 </tr>
 
 <?php }
@@ -196,25 +193,70 @@ WHERE exam.BookID=(SELECT BookID FROM assessment
 						INNER JOIN  student ON student.StudentID= history.StudentID
 						WHERE exam.BookID=(SELECT BookID FROM assessment
 						WHERE ExamID= '$examId') AND studentanswers.LetterAnswer = question.CorrectAnswer
-						GROUP BY exam.ExamID;" ;
+						GROUP BY exam.ExamID
+						ORDER BY grades ASC;" ;
 
 						$result = $conn->query($sqlCanswers) or die('Error showing exam year'.$conn->error);
 						echo '<option value="">Exam Year</option>';
+							$GLOBALS ['GradesArray'] = array();
 						while ( $row = mysqli_fetch_array ($result) ) {
 
-						//	$Grades= $row["grades"];
-							$GLOBALS ['GradesArray'] = [];
-							array_push($GradesArray, $row["grades"]);
+							$GradesArray[]=$row["grades"];
 				 }
-									//	print_r($GradesArray);
-						//	$GLOBALS['Median']= $GradesArray[round(count($GradesArray)/2)];
-							$GLOBALS['Median']=$GradesArray[9];
-							echo $GradesArray[round(count($GradesArray)/2)];
-						//	$Average = $points / $resp;
 
+						Arsort($GradesArray);
+
+							$GLOBALS['sdv']=Stand_Deviation($GradesArray);
+							$GLOBALS['Median']=FindMedian($GradesArray);
+							$GLOBALS['myMode']=FindMode($GradesArray);
+
+							//copying mode array in a variable
+										$s= ", ";
+										foreach ($myMode as $val){
+											if(count($myMode)> 1)
+										$GLOBALS['Mode'] = $val.$s.$Mode ;
+										else
+										$GLOBALS['Mode'] = $val;
+									 }
 		?>
-						<td><input style="border:none" name="Average" type="text"   value="<?= $Median?>" size="4" readonly>Points</td>
+						<td><input style="border:none" name="Median" type="text"   value="<?= $Median?>" size="4" readonly>Points</td>
 	</tr>
+	<tr>
+		<th>Mode</th>
+		<td><input style="border:none" name="Mode" type="text"   value="<?= $Mode?>" size="4" readonly>Points</td>
+	</tr>
+	<tr>
+		<th>Standard Deviation, σ</th>
+		<td><input style="border:none" name="Mode" type="text"   value="<?= number_format((float)$sdv,2, '.', ' ')?>" size="4" readonly></td>
+	</tr>
+
+
+
+
+	<tr>
+			<th>Pass Rate</th>
+			<?php
+							$sqlExamPoints="SELECT COUNT(question.points) as totalPoints
+							FROM question
+							INNER JOIN studentanswers ON studentanswers.QuestionID= question.QuestionID
+							INNER JOIN assessment ON assessment.ExamID= studentanswers.ExamID
+							WHERE assessment.BookID= (SELECT BookID FROM assessment WHERE ExamID= '$examId');" ;
+
+							$result = $conn->query($sqlExamPoints) or die('Error showing exam year'.$conn->error);
+							while ( $row = mysqli_fetch_array ($result) ) {
+
+								$GLOBALS['ExamPoints']= $row["totalPoints"];
+							}
+
+
+							$pass= PassRate($GradesArray, $ExamPoints, $resp);
+							$Percentage= ($pass/$resp) * 100;
+
+
+			?>
+
+							<td><input style="border:none" name="Average" type="text"   value="<?= round($Percentage)?>" size="2" readonly>% Of Students Passed The Test</td>
+		</tr>
 
 
 
@@ -285,8 +327,77 @@ ORDER BY COUNT(studentanswers.QuestionID) DESC LIMIT 1;" ;
 
 </table>
 </div>
+<?php
+function Stand_Deviation($arr)
+    {
+        $num_of_elements = count($arr);
 
-<?php include './navigation/navEnd.html'; ?>
+        $variance = 0.0;
+
+                // calculating mean using array_sum() method
+        $average = array_sum($arr)/$num_of_elements;
+
+        foreach($arr as $i)
+        {
+            // sum of squares of differences between
+                        // all numbers and means.
+            $variance += pow(($i - $average), 2);
+        }
+
+        return (float)sqrt($variance/$num_of_elements);
+    }
+
+
+		function FindMedian($arr) {
+		    $count = count($arr); //total numbers in array
+		    $midNumber = floor(($count-1)/2); // find the middle value, or the lowest middle value
+		    if($count % 2) { // odd number, middle is the median
+		        $median = $arr[$midNumber];
+		    } else { // even number, calculate avg of 2 medians
+		        $low = $arr[$midNumber];
+		        $high = $arr[$midNumber+1];
+		        $median = (($low+$high)/2);
+		    }
+		    return $median;
+		}
+
+		function FindMode($arr) {
+		  $values = array();
+		  foreach ($arr as $v) {
+		    if (isset($values[$v])) {
+		      $values[$v] ++;
+		    } else {
+		      $values[$v] = 1;  // counter of appearance
+		    }
+		  }
+		  arsort($values);  // sort the array by values, in non-ascending order.
+		  $modes = array();
+		  $x = $values[key($values)]; // get the most appeared counter
+		  reset($values);
+		  foreach ($values as $key => $v) {
+		    if ($v == $x) {   // if there are multiple 'most'
+		      $modes[] = $key;  // push to the modes array
+		    } else {
+		      break;
+		    }
+		  }
+		  return $modes;
+		}
+
+function PassRate($arr, $Epoints, $respondents){
+	$total= 0;
+	$grade= ($Epoints/$respondents);
+	$passGrade = $grade * 0.60;
+  $arrLength = count($arr);
+
+	for($x=0; $x<$arrLength; $x++){
+		if($arr[$x] > $passGrade)
+			$total= $total +1;
+	}
+	return $total;
+}
+
+ include './navigation/navEnd.html'; ?>
 
 
 

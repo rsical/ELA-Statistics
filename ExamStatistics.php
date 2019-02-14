@@ -32,36 +32,21 @@
   <br>
 	<div class="row" style="width:800px; margin:0 auto";>
 
-      <form method="post" action="ExamStatistics.php">
+      <form action="ExamStatistics.php" method="POST">
 			<table class="table">
 			<tr align="center">
+			<th  style="">Exam Year</th>
 			 <th  style="">Scope</th>
 			 <th style="">Students</th>
-			 <th  style="">Exam</th>
-			 <th style=""></th>
 			 </tr>
 
 			<tr>
-				</td>
-				<br>
-				<td>	<select name="examScope" id="examScope" required>
-				      	<option value="">Select Scope</option>
-				      	<option value="school">School</option>
-								<option value="class">Class</option>
-						 </select>
-				</td>
-				<br>
-
-				<td>	<select name="student" id="examStudent" required>
-								<option value="">Select Student</option>
-							</select>
-				</td>
-				<td>	<select name="exam">
+				<td>	<select name="ExamY" id="selectExamYear" required>
 					<?php
-					$sqlexamYear="SELECT  *
+					$sqlexamY="SELECT  *
 					FROM assessment Group by Date;" ;
-					$result = $conn->query($sqlexamYear) or die('Error showing exam year'.$conn->error);
-
+					$result = $conn->query($sqlexamY) or die('Error showing exam year'.$conn->error);
+							echo '<option value="">Exam Year</option>';
 							while ( $row = mysqli_fetch_array ($result) ) {
 							 $date = $row["Date"];
 							$year = intval($date);
@@ -70,6 +55,18 @@
 							}
 				?>
 			</select>
+	  	</td>
+
+				<td>	<select name="examScope" id="examScope" required>
+				      	<option value="">Select Scope</option>
+						  </select>
+				</td>
+				<br>
+
+				<td>	<select name="examtStudent" id="examStudent" required>
+								<option value="">Select Student</option>
+							</select>
+				</td>
 				<td>
 					<center><button class="btn btn-info" type ="submit" name="ViewExamStatistics" >View Statistics </button></center>
 				</td>

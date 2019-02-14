@@ -1,6 +1,6 @@
 
-
 	<?php
+  //include './includedFrameworks/bootstrapHead.html';
   include ("./db/connection/dbConnection.php");
 
 if (isset($_POST['Change']))
@@ -27,7 +27,8 @@ $pwd2 = sha1($conn->real_escape_string($_POST['pwd2']));
 	}
 	elseif(($oldPass == $currentPass) && ($pwd2 != $pwd)){
 		echo "<script>alert('Passwords must match');</script>";
-	}}
+	}
+}
 
 	elseif(($oldPass != $currentPass) && ($pwd2 == $pwd)){
 		echo "<script>alert('Old password is incorrect');</script>";
@@ -35,7 +36,7 @@ $pwd2 = sha1($conn->real_escape_string($_POST['pwd2']));
 
 
 }
-	
+
 
 ?>
 
@@ -60,5 +61,3 @@ $pwd2 = sha1($conn->real_escape_string($_POST['pwd2']));
 <center ><button class="button suggestion suggestionsButton" type ="submit" name="Change" >Update</button></center>
 
 </form>
-
-

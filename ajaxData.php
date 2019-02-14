@@ -18,26 +18,56 @@ include ("./db/connection/dbConnection.php");
 if(isset($_POST['ExamID'])){
   $exam_id = $conn->real_escape_string($_POST['ExamID']);
 
-  $sqlgrade="SELECT  class.Grade, assessment.ExamID, class.ClassID
-   FROM class class
-   INNER JOIN classhistory history ON class.ClassYear=history.ClassYear
-   INNER JOIN assessment assessment ON assessment.ClassHistoryID= history.ClassHistoryID
-  WHERE assessment.ExamID='$exam_id'
-   Group by class.ClassID;";
-  $result = $conn->query($sqlgrade) or die('Error showing grades'.$conn->error);
+  if (isset($_SESSION['isTeacher'])) {
+      if ($_SESSION['isTeacher']) {
+     $sqlgrade="SELECT  class.Grade, assessment.ExamID, class.ClassID, useraccount.UserID
+          FROM useraccount
+          INNER JOIN teacher ON useraccount.UserID= teacher.UserID
+          INNER JOIN class ON class.TeacherID = teacher.TeacherID
+          INNER JOIN classhistory history ON class.ClassYear=history.ClassYear
+          INNER JOIN assessment assessment ON assessment.ClassHistoryID= history.ClassHistoryID
+          WHERE assessment.ExamID= '$exam_id' AND useraccount.UserID= '$currUserID'
+          Group by class.ClassID;";
+          $GLOBALS['myCresult']= $conn->query($sqlgrade) or die('Error showing grades'.$conn->error);
+        }
+      }
+
+      if (isset($_SESSION['isAdmin'])) {
+        if ($_SESSION['isAdmin']) {
+          $sqlgrade="SELECT  class.Grade, assessment.ExamID, class.ClassID
+          FROM class class
+          INNER JOIN classhistory history ON class.ClassYear=history.ClassYear
+          INNER JOIN assessment assessment ON assessment.ClassHistoryID= history.ClassHistoryID
+          WHERE assessment.ExamID='$exam_id'
+          Group by class.ClassID;";
+          $GLOBALS['myCresult'] = $conn->query($sqlgrade) or die('Error showing grades'.$conn->error);
+        }
+      }
+
       echo '<option value=""> Select Grade</option>';
-      while ( $row = mysqli_fetch_array ($result) ) {
+      while ( $row = mysqli_fetch_array ($myCresult) ) {
           echo '<option value="'.$row["ClassID"].'|'.$row["Grade"].'">'.$row["ClassID"].'</option>';
       }
 }
 
+
+
 if(isset($_POST['Grade'])){
   $grade =$_POST['Grade'];
+  if (isset($_SESSION['isAdmin'])) {
+      if ($_SESSION['isAdmin']) {
   $school = "school";
         echo '<option value=""> Select Scope</option>';
         echo '<option value='.$school.'>School</option>';
         echo '<option value='.$grade.'>Class</option>';
-
+}
+}
+if (isset($_SESSION['isTeacher'])) {
+    if ($_SESSION['isTeacher']) {
+        echo '<option value=""> Select Scope</option>';
+        echo '<option value='.$grade.'>Class</option>';
+}
+}
 }
 
 if(isset($_POST['scope'])){
@@ -72,20 +102,5 @@ if($scope == "school"){
 }
 }
 
-
-
-//DEPENDENT DROPDOWN FOR EXAM STATISTICS
-
-if(isset($_POST['examScope'])){
-$scope = $conn->real_escape_string($_POST['examScope']);
-
-
-if($scope == "school"){
-  echo '<option value="ALL">ALL</option>';
-}
-else{
-    echo '<option value="ALL">Class</option>';
-}
-}
 
 ?>
