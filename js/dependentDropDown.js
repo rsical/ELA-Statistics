@@ -30,6 +30,7 @@
 			}
 	});
 
+
 	$("#scope").on('change', function(){
 		var scope = $(this).val();
 			if(scope){
@@ -44,16 +45,20 @@
 			}
 	});
 
+
+
+
+
 	//DEPENDENT DROPDOWN FOR EXAM STATISTICS
-	$("#examScope").on('change', function(){
-		var examScope = $(this).val();
-			if(examScope){
+	$("#test").on('change', function(){
+		var test = $(this).val();
+			if(test){
 				$.ajax({
 					type:'POST',
 					url:'ajaxData.php',
-					data:'examScope=' + examScope,
+					data:'test=' + test,
 					success:function(html){
-						$("#examStudent").html(html);
+						$("#examScope").html(html);
 					}
 				});
 			}

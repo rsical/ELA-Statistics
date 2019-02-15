@@ -32,16 +32,35 @@
 	<br>
 
 	<?php
+	if (isset($_SESSION['isTeacher'])) {
+	    if ($_SESSION['isTeacher']) {
+	$sqlTeachers="SELECT user.FName, user.UserID, user.LName AS userLName, user.FName AS userFName, student.StudentID, class.ClassYear, class.Grade, student.FName, student.LName, class.ClassID
+			FROM useraccount user
+            INNER JOIN  teacher ON user.UserID= teacher.UserID
+						INNER JOIN class ON teacher.teacherID= class.teacherID
+            INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
+						WHERE user.UserID = $currUserID AND classhistory.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
+						Group by user.UserID;" ;
+
+	$GLOBALS['Tresult'] = $conn->query($sqlTeachers) or die('Could not run query'.$conn->error);
+
+}
+}
+
+if (isset($_SESSION['isAdmin'])) {
+		if ($_SESSION['isAdmin']) {
 		$sqlTeachers= ("SELECT user.FName, user.UserID, user.LName AS userLName, user.FName AS userFName, student.StudentID, class.ClassYear, class.Grade, student.FName, student.LName, class.ClassID
 			FROM useraccount user
             INNER JOIN  teacher ON user.UserID= teacher.UserID
-			INNER JOIN class ON teacher.teacherID= class.teacherID
+						INNER JOIN class ON teacher.teacherID= class.teacherID
             INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
-WHERE classhistory.ClassYear = 2008
-Group by user.UserID");
+						WHERE classhistory.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
+						Group by user.UserID");
+$GLOBALS['Tresult'] = $conn->query($sqlTeachers) or die('Could not run query: '.$conn->error);
 
-	$result = $conn->query($sqlTeachers) or die('Could not run query: '.$conn->error);
-	if ($result->num_rows > 0) { ?>
+}
+}
+	if ($Tresult->num_rows > 0) { ?>
 
 			<div class="row" style="width:800px; margin:0 auto;">
 			<table class="table">
@@ -52,28 +71,28 @@ Group by user.UserID");
 			 </tr>
 
 			<?php
-			 while($row = $result->fetch_assoc()){
+			 while($row = $Tresult->fetch_assoc()){
 				 echo'<form action="ViewStudents.php" method="POST">';
 				 $UserId = $row["UserID"];
 				 $studentId = $row["studentID"];
 				 $classId = $row["ClassID"];
 				 $userFName = $row["userFName"];
 				 $userLName = $row["userLName"];
-				 $grade = $row["Grade"];
-				 $grades= ["Grade"];
+				 $mygrade = $row["Grade"];
+				 $grades= "Grade";
 				 ?>
 
 
 				 <tr>
-				 			<td><input class="form-control" name="teachersName" type="text"   value="<?= $userFName ?> <?= $userLName ?>"></td>
+				 			<td><input style="border:none" class="form-control" name="teachersName" type="text"   value="<?= $userFName ?> <?= $userLName ?>" readonly></td>
 
-				 			<td><input class="form-control" name="grade" type="text"   value="<?= $grade ?> <?= $grades ?>" size="12"></td>
+				 			<td><input style="border:none" class="form-control" name="mygrade" type="text"   value="<?= $mygrade ?> <?= $grades ?>" size="12" readonly></td>
 
 				 			<td><button  class="btn btn-info" type="submit"  name="ViewStudents" value=""><span class="fa fa-eye"></span> View Students</button></td>
 
-				 			<td><input name="UserId" type="hidden" value="<?= $UserId ?>"  ></td>
+				 			<td><input style="border:none" name="UserId" type="hidden" value="<?= $UserId ?>"  ></td>
 
-				 			<td><input name="studentId" type="hidden" value="<?= $studentId ?>"  ></td>
+				 			<td><input style="border:none" name="studentId" type="hidden" value="<?= $studentId ?>"  ></td>
 
 				 <td><input name="classId" type="hidden" value="<?= $classId ?>"  ></td>
 				</tr>

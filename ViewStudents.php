@@ -37,7 +37,7 @@
 		$studentId = $_POST['studentID'];
 		$classId = $_POST['classID'];
 		$teachersName = $_POST['teachersName'];
-		$grade = $_POST['grade'];
+		$mygrade = $_POST['mygrade'];
 
 
 		$sqlStudents= ("SELECT user.FName, user.UserID, user.LName AS userLName, user.FName AS userFName, student.StudentID, class.ClassYear, class.Grade, student.FName, student.LName, class.ClassID
@@ -45,14 +45,14 @@
       INNER JOIN  teacher ON user.UserID= teacher.UserID
 			INNER JOIN class ON teacher.teacherID= class.teacherID
       INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
-			WHERE user.UserID = '$UserId' AND class.Grade= '$grade' AND class.ClassYear = YEAR(CURDATE())
+			WHERE user.UserID = '$UserId' AND class.Grade= '$mygrade' AND class.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
 			Group by student.studentID");
 
 	$result = $conn->query($sqlStudents) or die('Could not run query: '.$conn->error);
 }
 	if ($result->num_rows > 0) { ?>
 			<div class="row" style="width:600px; margin:0 auto;">
-				<?php echo "<b>" .$teachersName." ".$grade. "</b>"; ?>
+				<?php echo "<b>" .$teachersName." ----- ".$mygrade. "</b>"; ?>
 			</div>
 
 			<div class="row" style="width:600px; margin:0 auto;">
@@ -70,9 +70,9 @@
 
 
 				 <tr>
-				 			<td><input class="form-control" name="teachersName" type="text"   value="<?= $FName ?> <?= $LName ?>"></td>
+				 			<td align='center'><input style="border:none" class="form-control" name="teachersName" type="text"   value="<?= $FName ?> <?= $LName ?>" readonly></td>
 
-				 			<td><input name="studentId" type="hidden" value="<?= $studentId ?>"  ></td>
+				 			<td><input style="border:none" name="studentId" type="hidden" value="<?= $studentId ?>" readonly ></td>
 
 					</tr>
 				</form>
