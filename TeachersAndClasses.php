@@ -10,7 +10,7 @@
 	}
 
 	if (isset($_SESSION['isAdmin'])) {
-		if (!$_SESSION['isAdmin']) { 
+		if (!$_SESSION['isAdmin']) {
 			header("Location: 403.php");
 		}
 	}
@@ -43,11 +43,15 @@
 		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createTeacher"><span class="fa fa-plus"></span> Create Teacher</button>
 	</div>
 
+
 	<?php
 		$sqlTeachers= ("SELECT user.UserID, user.FName, user.LName, class.ClassYear, class.Grade, teachers.TeacherID
 			FROM useraccount user
 			INNER JOIN teacher teachers ON user.UserID= teachers.UserID
-			INNER JOIN class ON teachers.teacherID= class.teacherID;");
+			INNER JOIN class ON teachers.TeacherID= class.TeacherID
+			INNER JOIN classhistory ON classhistory.ClassID= class.ClassID
+			WHERE classhistory.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
+	  	Group by teachers.TeacherID;");
 
 	$result = $conn->query($sqlTeachers) or die('Could not run query: '.$conn->error);
 	if ($result->num_rows > 0) { ?>

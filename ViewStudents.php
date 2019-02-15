@@ -44,7 +44,8 @@
 			FROM useraccount user
       INNER JOIN  teacher ON user.UserID= teacher.UserID
 			INNER JOIN class ON teacher.teacherID= class.teacherID
-      INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
+      INNER JOIN classhistory ON classhistory.ClassID= class.ClassID
+		  INNER JOIN student ON student.StudentID = classhistory.StudentID
 			WHERE user.UserID = '$UserId' AND class.Grade= '$mygrade' AND class.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
 			Group by student.studentID");
 

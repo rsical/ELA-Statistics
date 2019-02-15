@@ -28,13 +28,13 @@ $pwd2 = sha1($conn->real_escape_string($_POST['pwd2']));
 	elseif(($oldPass == $currentPass) && ($pwd2 != $pwd)){
 		echo "<script>alert('Passwords must match');</script>";
 	}
-}
+
 
 	elseif(($oldPass != $currentPass) && ($pwd2 == $pwd)){
 		echo "<script>alert('Old password is incorrect');</script>";
 	}
 
-
+}
 }
 
 

@@ -49,7 +49,7 @@
 							$sqlexamY="SELECT assessment.Date, assessment.ExamID, useraccount.UserID
 							FROM assessment
 							INNER JOIN classhistory ON classhistory.ClassHistoryID= assessment.ClassHistoryID
-							INNER JOIN class ON class.ClassYear = classhistory.ClassYear
+							INNER JOIN class ON class.ClassID = classhistory.ClassID
 							INNER JOIN teacher ON teacher.TeacherID= class.TeacherID
 							INNER JOIN useraccount ON useraccount.UserID = teacher.UserID
 							WHERE useraccount.UserID=$currUserID
