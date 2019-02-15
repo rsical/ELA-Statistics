@@ -86,7 +86,7 @@ if($scope == "school"){
     $sqlstudent="SELECT class.ClassID, student.StudentID, student.FName, student.LName, assessment.Date, assessment.ExamID, assessment.BookID,
     book.BookID
     FROM class class
-    INNER JOIN classhistory history ON class.ClassYear = history.ClassYear
+    INNER JOIN classhistory history ON class.ClassID = history.ClassID
     INNER JOIN student student ON student.StudentID= history.StudentID
     INNER JOIN assessment assessment ON assessment.ClassHistoryID= history.ClassHistoryID
     INNER JOIN book book ON assessment.BookID = book.BookID

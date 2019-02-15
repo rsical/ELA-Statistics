@@ -38,7 +38,7 @@
 			FROM useraccount user
             INNER JOIN  teacher ON user.UserID= teacher.UserID
 						INNER JOIN class ON teacher.teacherID= class.teacherID
-            INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
+            INNER JOIN classhistory ON classhistory.ClassID= class.ClassID INNER JOIN student ON student.StudentID = classhistory.StudentID
 						WHERE user.UserID = $currUserID AND classhistory.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
 						Group by user.UserID;" ;
 
@@ -53,7 +53,7 @@ if (isset($_SESSION['isAdmin'])) {
 			FROM useraccount user
             INNER JOIN  teacher ON user.UserID= teacher.UserID
 						INNER JOIN class ON teacher.teacherID= class.teacherID
-            INNER JOIN classhistory ON classhistory.ClassYear= class.ClassYear INNER JOIN student ON student.StudentID = classhistory.StudentID
+            INNER JOIN classhistory ON classhistory.ClassID= class.ClassID INNER JOIN student ON student.StudentID = classhistory.StudentID
 						WHERE classhistory.ClassYear = (SELECT MAX(ClassYear) FROM classhistory)
 						Group by user.UserID");
 $GLOBALS['Tresult'] = $conn->query($sqlTeachers) or die('Could not run query: '.$conn->error);
