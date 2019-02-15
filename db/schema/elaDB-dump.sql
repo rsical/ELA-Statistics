@@ -346,7 +346,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,1,5),(2,1,6),(3,1,7),(4,1,8),(5,1,9),(6,1,10),(7,1,11),(8,1,12),(9,1,13);
+INSERT INTO `teacher` VALUES (1,1,5),(2,1,6),(3,1,7),(4,1,8),(5,1,9),(6,1,10),(7,1,11),(8,2,12),(9,2,13);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +377,7 @@ CREATE TABLE `useraccount` (
 
 LOCK TABLES `useraccount` WRITE;
 /*!40000 ALTER TABLE `useraccount` DISABLE KEYS */;
-INSERT INTO `useraccount` VALUES (1,1,'Ileana','Palesi','ipalesi1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(2,1,'Romina','Sical','rsical1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(3,1,'Amanda','Aebig','aaebig1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(4,1,'Alex','Rousak','arousak1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(5,1,'Chia','Ling-Tsai','CTsai@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(6,1,'Lubomir','Ivanov','Livanov@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(7,1,'Frances','Bailie','FBailie@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(8,1,'Kenneth','Bailie','kbailie@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(9,1,'Robert','Schiaffino','RSchiaffino@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(10,1,'Erald','Troja','etroja@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(11,1,'Paolina','Centonze','pcentonze@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(12,1,'Smiljana','Petrovic','SPetrovic@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(13,1,'Jongwook','Kim','jkim@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1);
+INSERT INTO `useraccount` VALUES (1,1,'Ileana','Palesi','ipalesi1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(2,1,'Romina','Sical','rsical1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(3,2,'Amanda','Aebig','aaebig1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(4,2,'Alex','Rousak','arousak1@gaels.iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','admin',1),(5,1,'Chia','Ling-Tsai','CTsai@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(6,1,'Lubomir','Ivanov','Livanov@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(7,1,'Frances','Bailie','FBailie@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(8,1,'Kenneth','Bailie','kbailie@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(9,1,'Robert','Schiaffino','RSchiaffino@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(10,1,'Erald','Troja','etroja@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(11,1,'Paolina','Centonze','pcentonze@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(12,2,'Smiljana','Petrovic','SPetrovic@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1),(13,2,'Jongwook','Kim','jkim@iona.edu','8679258b07aad79fb5191b069eece6c9bffed5f7','teacher-new',1);
 /*!40000 ALTER TABLE `useraccount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -417,4 +417,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-14 18:44:47
+-- Dump completed on 2019-02-15 13:02:06

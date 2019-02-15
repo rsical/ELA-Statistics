@@ -135,8 +135,8 @@ INSERT INTO School (School_Name,Address) VALUES("Illvermorny School of Witchcraf
 
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Ileana","Palesi","ipalesi1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Romina","Sical","rsical1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
-INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Amanda","Aebig","aaebig1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
-INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Alex","Rousak","arousak1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
+INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),"Amanda","Aebig","aaebig1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
+INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),"Alex","Rousak","arousak1@gaels.iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","admin",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Chia","Ling-Tsai","CTsai@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Lubomir","Ivanov","Livanov@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Frances","Bailie","FBailie@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
@@ -144,8 +144,8 @@ INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,Recover
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Robert","Schiaffino","RSchiaffino@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Erald","Troja","etroja@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
 INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Paolina","Centonze","pcentonze@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
-INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Smiljana","Petrovic","SPetrovic@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
-INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),"Jongwook","Kim","jkim@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
+INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),"Smiljana","Petrovic","SPetrovic@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
+INSERT INTO UserAccount (SchoolID,FName,LName,Email,Password,AccountType,RecoveryPassword) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),"Jongwook","Kim","jkim@iona.edu","8679258b07aad79fb5191b069eece6c9bffed5f7","teacher-new",true);
 
 
 INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="CTsai@iona.edu"));
@@ -155,8 +155,8 @@ INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE 
 INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="RSchiaffino@iona.edu"));
 INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="etroja@iona.edu"));
 INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="pcentonze@iona.edu"));
-INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="SPetrovic@iona.edu"));
-INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="River Valley Elementary"),(SELECT UserID from UserAccount WHERE Email="jkim@iona.edu"));
+INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),(SELECT UserID from UserAccount WHERE Email="SPetrovic@iona.edu"));
+INSERT INTO Teacher (SchoolID,UserID) VALUES((SELECT SchoolID from School WHERE School_Name="Hogwarts School of Witchcraft and Wizardry"),(SELECT UserID from UserAccount WHERE Email="jkim@iona.edu"));
 
 
 INSERT INTO Class (TeacherID,Grade,ClassYear,Size) VALUES((SELECT TeacherID from Teacher WHERE UserID=(select UserID from UserAccount where Email="CTsai@iona.edu")),4,2006,21);
