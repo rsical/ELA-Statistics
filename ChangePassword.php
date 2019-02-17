@@ -3,7 +3,7 @@
   //include './includedFrameworks/bootstrapHead.html';
   include ("./db/connection/dbConnection.php");
 
-if (isset($_POST['Change']))
+if (isset($_POST['buttonChangePassword']))
 {
 $oldPass = sha1($conn->real_escape_string($_POST['oldPassword']));
 //$oldPass = $conn->real_escape_string($_POST['oldPass']);
@@ -76,25 +76,3 @@ $pwd2 = sha1($conn->real_escape_string($_POST['newPasswordTwice']));
 
 	</form>
 </div>
-
-<!-- <form method="post">
-<center><h3> Change Password</h3></center>
-<table align='center'>
-<br>
-<tr>
-<td style='color: black;'>Old Password</td>
-<td><input style='color:black;' type="password" name="oldPass" required></td>
-</tr>
-<tr>
-<td style='color: black;'>New Password </td>
-<td><input style='color:black;' type="password" name="pwd" required></td>
-</tr>
-<tr>
-<td style='color: black;'>Confirm Password</td>
-<td><input style='color:black;' type="password" name="pwd2" required></td>
-</tr>
-</table>
-<br>
-<center ><button class="button suggestion suggestionsButton" type ="submit" name="Change" >Update</button></center> -->
-
-</form>
