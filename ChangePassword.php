@@ -33,7 +33,7 @@ if (isset($_POST['buttonChangePassword'])) {
 			$update="UPDATE useraccount SET Password='$pwd' WHERE UserID='$userId';";
 			$conn->query($update);
 
-			echo "<script>alert('Password Updated Succesfully');</script>";
+			echo "<script>alert('Password Updated Successfully');</script>";
 		}
 
 
