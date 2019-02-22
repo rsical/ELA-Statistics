@@ -1,5 +1,6 @@
 <?php
 
+//class to deal with various mathematical calculations on an array of grades
 class StatsCalculator{
 
     //an array containing grades
@@ -7,25 +8,25 @@ class StatsCalculator{
 
     //constructor
     public function StatsCalculator($_gradeArr){
-        $gradeArr = $_gradeArr;
+        $this->gradeArr = $_gradeArr;
     }
 
     //setter for grades array
     public function setGradeArr($_gradeArr){
-        $gradeArr=$_gradeArr;
+        $this->gradeArr=$_gradeArr;
     }
 
 
     //calculates the standard deviartion
     public function standardDeviation(){
-        $num_of_elements = count($arr);
+        $num_of_elements = count($this->gradeArr);
 
         $variance = 0.0;
 
         // calculating mean using array_sum() method
-        $average = array_sum($arr)/$num_of_elements;
+        $average = array_sum($this->gradeArr)/$num_of_elements;
 
-        foreach($arr as $i){
+        foreach($this->gradeArr as $i){
             // sum of squares of differences between
                         // all numbers and means.
             $variance += pow(($i - $average), 2);
@@ -37,14 +38,14 @@ class StatsCalculator{
 
     //calculate the median
     public function median(){
-        sort($gradeArr);
-        $count = count($gradeArr); //total numbers in array
+        sort($this->gradeArr);
+        $count = count($this->gradeArr); //total numbers in array
         $midNumber = floor(($count-1)/2); // find the middle value, or the lowest middle value
         if($count % 2) { // odd number, middle is the median
-            $median = $gradeArr[$midNumber];
+            $median = $this->gradeArr[$midNumber];
         } else { // even number, calculate avg of 2 medians
-            $low = $gradeArr[$midNumber];
-            $high = $gradeArr[$midNumber+1];
+            $low = $this->gradeArr[$midNumber];
+            $high = $this->gradeArr[$midNumber+1];
             $median = (($low+$high)/2);
         }
         return $median;
@@ -54,7 +55,7 @@ class StatsCalculator{
     //calculate the mode
     public function mode(){
         $values = array();
-        foreach ($gradeArr as $v) {
+        foreach ($this->gradeArr as $v) {
           if (isset($values[$v])) {
             $values[$v] ++;
           } else {
