@@ -7,7 +7,7 @@ class StatsCalculator{
     private $gradeArr;
 
     //constructor
-    public function StatsCalculator($_gradeArr){
+    public function __construct($_gradeArr){
         $this->gradeArr = $_gradeArr;
     }
 
