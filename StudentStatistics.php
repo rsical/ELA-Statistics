@@ -515,8 +515,10 @@
 
 	function PassRate($arr, $Epoints, $respondents){
 
+		echo 'items in array ';
 		echo count($arr);
 		echo '</br>';
+		echo 'respondents ';
 		echo $respondents;
 
 		$total= 0;
