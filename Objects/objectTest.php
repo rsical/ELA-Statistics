@@ -1,6 +1,6 @@
-<?php include './Objects/StatsCalculator.php';?>
+<?php include 'StatsCalculator.php';?>
 
-<?php include './Objects/ExamGrader.php';?>
+<?php include 'ExamGrader.php';?>
 
 
 
