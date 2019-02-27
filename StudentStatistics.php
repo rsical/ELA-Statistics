@@ -181,7 +181,7 @@
 						 </tr>
 					 <?php } ?>
 						<tr>
-						<th>Correct Answers</th>
+						<th>Grade</th>
 						<?php
 							$sqlExamPoints="SELECT COUNT(question.points) as totalPoints
 							FROM question
@@ -219,7 +219,7 @@
 
 					</tr>
 					<tr>
-						<th>Grade</th>
+						<th>Correct Answers</th>
 						<td><input style="border:none" name="points" type="text"   value="<?= $points?>   <?= "Points    -".$Mresult ?>" size="36" readonly></td>
 
 					</tr>
@@ -514,6 +514,13 @@
 			}
 
 	function PassRate($arr, $Epoints, $respondents){
+
+		echo 'items in array ';
+		echo count($arr);
+		echo '</br>';
+		echo 'respondents ';
+		echo $respondents;
+
 		$total= 0;
 		$grade= ($Epoints/$respondents);
 		$passGrade = $grade * 0.60;

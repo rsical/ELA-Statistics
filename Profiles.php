@@ -74,7 +74,7 @@ $GLOBALS['Tresult'] = $conn->query($sqlTeachers) or die('Could not run query: '.
 			 while($row = $Tresult->fetch_assoc()){
 				 echo'<form action="ViewStudents.php" method="POST">';
 				 $UserId = $row["UserID"];
-				 $studentId = $row["studentID"];
+				 $studentId = $row["StudentID"];
 				 $classId = $row["ClassID"];
 				 $userFName = $row["userFName"];
 				 $userLName = $row["userLName"];

@@ -34,8 +34,8 @@
 	<?php
 	if (isset($_POST['ViewStudents'])){
 		$UserId = $_POST['UserId'];
-		$studentId = $_POST['studentID'];
-		$classId = $_POST['classID'];
+		$studentId = $_POST['studentId'];
+		$classId = $_POST['classId'];
 		$teachersName = $_POST['teachersName'];
 		$mygrade = $_POST['mygrade'];
 
@@ -64,7 +64,7 @@
 
 			<?php
 			 while($row = $result->fetch_assoc()){
-				 $studentId = $row["studentID"];
+				 $studentId = $row["StudentID"];
 				 $FName = $row["FName"];
 				 $LName = $row["LName"];
 				 ?>
