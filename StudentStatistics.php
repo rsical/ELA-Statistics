@@ -257,7 +257,7 @@
 
 					<th>Lowest Grade</th>
 					<?php
-									$sqlEanswer="SELECT count(studentanswers.QuestionID), studentanswers.LetterAnswer, question.CorrectAnswer, COUNT(question.Points) as Highest, exam.ExamID
+									$sqlEanswer="SELECT count(studentanswers.QuestionID), studentanswers.LetterAnswer, question.CorrectAnswer, COUNT(question.Points) as Lowest, exam.ExamID
 									FROM studentanswers
 									INNER JOIN question question ON studentanswers.QuestionID= question.QuestionID
 									INNER JOIN  assessment exam ON studentanswers.ExamID= exam.ExamID
@@ -267,17 +267,18 @@
 									WHERE exam.BookID=(SELECT BookID FROM assessment
 									WHERE ExamID= '$examId') AND studentanswers.LetterAnswer = question.CorrectAnswer
 									GROUP BY exam.ExamID
-									ORDER BY Highest ASC limit 1;" ;
+									ORDER BY Lowest ASC limit 1;" ;
 
 
 
 									$result = $conn->query($sqlEanswer) or die('Error showing exam year'.$conn->error);
 									echo '<option value="">Exam Year</option>';
 									while ( $row = mysqli_fetch_array ($result) ) {
-										$highest = $row["Highest"];
+										$Lowest = $row["Lowest"];
+								
 
 					?>
-									<td><input style="border:none" name="Average" type="text"   value="<?=$highest?>" size="2" readonly> Points</td>
+									<td><input style="border:none" name="Average" type="text"   value="<?=$Lowest?>" size="2" readonly> Points</td>
 				</tr>
 		<?php	 }
 		?>

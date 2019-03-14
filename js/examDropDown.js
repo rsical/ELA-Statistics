@@ -23,6 +23,20 @@ $("#examScope").on('change', function(){
         url:'examAjax.php',
         data:'examScope=' + examScope,
         success:function(html){
+          $("#examClass").html(html);
+        }
+      });
+    }
+});
+
+$("#examClass").on('change', function(){
+  var examClass = $(this).val();
+    if(examClass){
+      $.ajax({
+        type:'POST',
+        url:'examAjax.php',
+        data:'examClass=' + examClass,
+        success:function(html){
           $("#examStudent").html(html);
         }
       });

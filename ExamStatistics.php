@@ -37,6 +37,7 @@
 			<tr align="center">
 			<th  style="">Exam Year</th>
 			 <th  style="">Scope</th>
+			 <th style="">Class</th>
 			 <th style="">Students</th>
 			 </tr>
 
@@ -50,7 +51,7 @@
 							while ( $row = mysqli_fetch_array ($result) ) {
 							 $date = $row["Date"];
 							$year = intval($date);
-									echo '<option value="'.$row["ExamID"].'">'.$year.'</option>';
+									echo '<option value='.$row["ExamID"].'>'.$year.'</option>';
 
 							}
 				?>
@@ -63,7 +64,12 @@
 				</td>
 				<br>
 
-				<td>	<select name="examtStudent" id="examStudent" required>
+				<td>	<select name="examClass" id="examClass" required>
+								<option value="">Select Class</option>
+							</select>
+				</td>
+				<br>
+				<td>	<select name="examStudent" id="examStudent" required>
 								<option value="">Select Student</option>
 							</select>
 				</td>
@@ -76,52 +82,126 @@
 	 </form>
 	</div>
 
-
 	<?php
+
 	if (isset($_POST['ViewExamStatistics']))
   {
-		$examYear= $_POST['exam'];
-		$sqlTeachers= ("SELECT * FROM assessment WHERE ExamID = '$examYear'");
+		$exam= $_POST['ExamY'];
+		$sqlTeachers= ("SELECT * FROM assessment WHERE ExamID = '$exam'");
+		$GLOBALS['scope']= $_POST['examScope'];
+		$GLOBALS['class']= $_POST['examClass'];
+		$GLOBALS['student']= $_POST['examStudent'];
+		$info=("select Question.QuestionNumber, Question.Indicator, Question.QuestionText, Question.CorrectAnswer
+				from Question
+				inner join StudentAnswers on Question.QuestionID=StudentAnswers.QuestionID
+				inner join Assessment on StudentAnswers.ExamID=Assessment.ExamID
+				inner join Book on Assessment.BookID=Book.BookID
+				where Assessment.ExamID='$exam'");					//return exam info
 
-	$result = $conn->query($sqlTeachers) or die('Could not run query: '.$conn->error);
+	$result = $conn->query($info) or die('Could not run query: '.$conn->error);
 
 if ($result->num_rows > 0) { ?>
 
 			<div class="row">
 			<table class="table">
+			<style>
+				table{border-collapse: collapse; }
+
+				tr:nth-child(odd)
+				{background-color: #f2f2f2;}
+
+				th {
+				background: #3498db;
+				color: white;
+				font-weight: bold;
+				}
+
+				td, th {
+					padding: 10px;
+					border: 1px solid #ccc;
+					text-align: left;
+					font-size: 18px;
+					}
+
+				.labels tr td {
+					background-color: #2cc16a;
+					font-weight: bold;
+					color: #fff;
+				}
+
+				.label tr td label {
+					display: block;
+				}
+
+
+				[data-toggle="toggle"] {
+					display: none;
+				}
+
+				tr
+				{
+					cursor:pointer;
+				}
+				<script type="text/javascript">$(document).ready(function() {
+				$('[data-toggle="toggle"]').change(function(){
+					$(this).parents().next('.hide').toggle();
+				});
+				});</script>
+			</style>
 			<tr>
-			 <th  style="">Question Number</th>
-			 <th style="">Indicator</th>
-			 <th  style="">Question</th>
-			 <th style="">Answer</th>
+			 <th  style="width:10%">Question Number</th>
+			 <th style="width:15%">Indicator</th>
+			 <th  style="width:65%">Question</th>
+			 <th style="width:10%">Answer</th>
 			 </tr>
 
 			<?php
 			 while($row = $result->fetch_assoc()){
-				 echo'<form action="DeleteTeacher.php" method="POST">';
-				 $examId = $row["ExamID"];
-				 $date = $row["Date"];
-				 $size = $row["ClassSize"];
-				 $csize = $row["ClassSize"];
+				 $GLOBALS['qNum'] = $row["QuestionNumber"];
+				 $GLOBALS['indicator'] = $row["Indicator"];
+				 $GLOBALS['question'] = $row["QuestionText"];
+				 $GLOBALS['cAnswer'] = $row["CorrectAnswer"];
 				 ?>
 
-				 <tr>
-				 <td><input class="form-control" name="Name" type="text"   value="<?= $examId?>"></td>
-
-				 <td><input class="form-control" name="teachersName" type="text"   value="<?= $date ?>"></td>
-
-					<td><input name="teacherId" type="text" value="<?= $size ?>"  ></td>
-
-					<td><input name="studentId" type="text" value="<?= $csize ?>"  ></td>
+				 <tr class="labels">
+					<td><input  style="border:none" name="qNum" type="text"   value="<?= $qNum?>" size="4" readonly></td>
+					<td><input  style="border:none" name="indicator" type="text"   value="<?= $indicator?>" readonly></td>
+					<td><input  style="border:none" name="question" type="text"   value="<?= $question?>" size="90" readonly></td>
+					<td><input  style="border:none" name="cAnswer" type="text"   value="<?= $cAnswer?>" size="4" readonly></td>
 				</tr>
-				</form>
-		<?php } ?>
+
+				 <?php
+				//$percentArr = getPercentage();					//return array of 4 percentages, 1 for each letter answer
+				//$test=sum(2,6);									//doesn't work either
+				$GLOBALS['test']=sum(2,6);
+
+				for($i=0; $i<4; $i++)
+				{
+					//$percentVal= $percentArr[i];
+				?>
+				<tr class="hide">
+					<td><input style="border:none" name="letter" type="text"   value="<?=A?>" size="4" readonly></td>
+					<td><input style="border:none" name="letter" type="text"   value="<?=$test?>" size="4" readonly></td>
+				</tr>
+				<?php
+				}
+				?>
+			<?php
+			}
+		}
+	}?>
 		</table>
 			 </div>
-		<?php }
 
-	}
-		 ?>
+<?php
+function sum($x, $y) {
+    $z = $x + $y;
+    return $z;
+}
+?>
+
+
+
 
 <?php include './navigation/navEnd.html'; ?>
 
