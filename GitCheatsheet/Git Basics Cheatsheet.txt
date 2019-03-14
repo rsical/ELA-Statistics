@@ -1,4 +1,4 @@
-Amanda's Git Basics Cheatsheet
+brAmanda's Git Basics Cheatsheet
 
 
 Download Git:
